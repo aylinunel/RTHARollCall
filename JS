@@ -1,0 +1,77 @@
+// Employees list - From creator side
+const employees = [
+    'James Riady',
+    'Erik Geertsema',
+    'Bartjan Rietdijk',
+    'Durandus Dijken',
+    'Kevin Pijper',
+    'Joseph Micheals',
+    'Anas Mulla Khatter',
+    'Derya Kaya Leblebici',
+    'Arun Joseph',
+    'Bidin Sulejmanovic',
+    'Aylin Ünel',
+    'Onno Schreurs'
+];
+
+// Create buttons for each employee
+const employeeContainer = document.getElementById('employeeContainer');
+const scenicImage = document.getElementById('scenicImage');
+const clapContainer = document.getElementById('clapContainer');
+let completedTasks = 0;
+
+employees.forEach((employee, index) => {
+    const button = document.createElement('button');
+    button.textContent = employee;
+    button.id = `employee-${index}`;
+    button.addEventListener('click', () => toggleTask(button, index));
+    employeeContainer.appendChild(button);
+});
+
+// Function to toggle task completion (red to green and vice versa)
+function toggleTask(button, index) {
+    if (!button.classList.contains('done')) {
+        // Mark as done
+        button.classList.add('done');
+        button.textContent = `${employees[index]} - Done`;
+        showClapAnimation();
+        expandImage();
+    } else {
+        // Toggle back to undone
+        button.classList.remove('done');
+        button.textContent = employees[index];
+    }
+}
+
+function showClapAnimation() {
+    // Create 10 random clap emojis of varying sizes and positions
+    for (let i = 0; i < 10; i++) {
+        const clap = document.createElement('span');
+        clap.textContent = '👏';
+        clap.classList.add('clap');
+
+        // Randomize size and position
+        const size = Math.random() * 40 + 20; // Random size between 20px and 60px
+        const posX = Math.random() * window.innerWidth; // Random X position
+        const posY = Math.random() * window.innerHeight; // Random Y position
+        clap.style.fontSize = `${size}px`;
+        clap.style.left = `${posX}px`;
+        clap.style.top = `${posY}px`;
+
+        // Append to the clapContainer and remove after animation
+        clapContainer.appendChild(clap);
+        setTimeout(() => {
+            clap.remove();
+        }, 1000);
+    }
+}
+
+function expandImage() {
+    scenicImage.style.visibility = 'visible'; // Ensure the image is visible
+    scenicImage.classList.add('expanded'); // Expand the image slightly
+    
+    // Return to normal size after 5 seconds
+    setTimeout(() => {
+        scenicImage.classList.remove('expanded');
+    }, 5000);
+}
