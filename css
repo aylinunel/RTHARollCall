@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Ensures full-screen animations fit */
+}
+
+#employeeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.done {
+    background-color: green;
+}
+
+button.done::after {
+    content: ' ✓';
+    color: white;
+    margin-left: 10px;
+}
+
+#scenicImage {
+    margin-top: 30px;
+    visibility: hidden;
+    transition: transform 1s ease, visibility 0.5s ease;
+}
+
+#scenicImage.expanded {
+    /* Expands the image by 20% */
+    transform: scale(1.2);
+}
+
+#scenicImage img {
+    width: 300px;
+    height: auto;
+    transition: transform 1s ease;
+}
+
+#clapContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+.clap {
+    position: absolute;
+    font-size: 30px;
+    animation: fade 1s ease;
+    color: gold;
+    z-index: 9999;
+}
+
+@keyframes fade {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
